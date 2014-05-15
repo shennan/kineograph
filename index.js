@@ -150,7 +150,7 @@ function image(path, key){
 	var img = this.appendChild( document.createElement( 'img' ) );
 	img.src = path;
 	img.style.visibility = 'hidden';
-	
+
 	if(this._images[key])
 		this._images[key].push(img);
 	else
@@ -173,7 +173,7 @@ function add(ani, loop, callback){
 	loop = typeof loop === 'number' ? parseInt(loop) : 1;
 
 	if(!this._images[ani])
-		throw new Error(ani + 'does not exist');
+		throw new Error(ani + ' does not exist');
 
 	this._animations.push({ani:ani, loop:loop, callback:callback});
 
