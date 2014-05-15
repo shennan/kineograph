@@ -33,7 +33,7 @@ function Kineograph(imgs) {
 *		@api public
 */
 
-Kineograph.prototype._images = {};
+Kineograph.prototype._images = undefined;
 Kineograph.prototype._animations = [];
 Kineograph.prototype._animating = undefined;
 Kineograph.prototype._unloop = false;
@@ -150,11 +150,14 @@ function image(path, key){
 	var img = this.appendChild( document.createElement( 'img' ) );
 	img.src = path;
 
-	if(this._images === {}){
+	if(!this._images){
 		show.apply(this, [img])
 	}else{
 		img.style.visibility = 'hidden';
 	}
+
+	if(!this._images)
+		this._images = {};
 
 	if(this._images[key])
 		this._images[key].push(img);
