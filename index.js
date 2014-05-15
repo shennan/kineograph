@@ -150,7 +150,7 @@ function image(path, key){
 	var img = this.appendChild( document.createElement( 'img' ) );
 	img.src = path;
 
-	if(!this._images === {}){
+	if(this._images === {}){
 		show.apply(this, [img])
 	}else{
 		img.style.visibility = 'hidden';
