@@ -149,7 +149,11 @@ function image(path, key){
 
 	var img = this.appendChild( document.createElement( 'img' ) );
 	img.src = path;
-	img.style.visibility = 'hidden';
+
+	if(!this._images.length)
+		show.apply(this, [img])
+	else
+		img.style.visibility = 'hidden';
 
 	if(!this._images)
 		this._images = {};
