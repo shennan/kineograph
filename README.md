@@ -1,10 +1,10 @@
-## kineograph
-
 ![kineograph](kineograph.jpg?raw=true)
+
+## kineograph
 
 #### what is it?
 
-A kineograph was the official term for a Flip Book, an early animation aperatus patented by John Barnes Linnett.
+A kineograph was the official term for a Flip Book, an early animation apparatus patented by John Barnes Linnett.
 
 #### what is it really?
 
