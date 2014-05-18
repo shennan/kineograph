@@ -59,11 +59,15 @@ anim.play('hop').play('skip');
 
 You may want to have a never ending loop by specifying 0 as the second argument:
 
+```js
 anim.play('hop', 0);
+```
 
 To break out of that loop, you can call `unloop`:
 
+```js
 anim.unloop().play('skip');
+```
 
 In the above scenario, our Kineograph will wait for the looped animation to finish gracefully before moving onto the next animation.
 
