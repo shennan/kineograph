@@ -16,67 +16,78 @@ Becuase CSS sprites can't be effortlessly positioned in a fluid-layout. Go and c
 
 ## install
 
+Install with [component](https://github.com/component/component):
+
 ```
 $ component install shennan/kineograph
 ```
 
 ## usage
 
-```js
-var Kineograph = require('kineograph')
+The simplest usage is to pass an array of images to the Kineograph factory method:
 
-var anim = new Kineograph({
+```js
+var kineograph = require('kineograph');
+
+var anim = kineograph(['path/to/image1.png', 'path/to/image3.png', 'path/to/image2.png']);
+
+anim.play(function(){
+		
+	console.log('finished');
+
+});
+```
+
+For more complex sequences, you can specify individual animation names by passing an object to the factory method:
+
+```js
+var anim = kineograph({
 	hop:[
-		'anim/hop1.png',
-		'anim/hop2.png',
-		'anim/hop3.png'
+		'path/to/hop1.png',
+		'path/to/hop2.png',
+		'path/to/hop3.png'
 	],
 	skip:[
-		'anim/skip1.png',
-		'anim/skip2.png',
-		'anim/skip3.png'
+		'path/to/skip1.png',
+		'path/to/skip2.png',
+		'path/to/skip3.png'
 	]
-})
-
-// hop twice then skip once
-anim.play('hop', 2, function(){
-	anim.play('skip', 1, function(){
-
-	})	
-})
+});
 ```
+
+You can then chain animations which will be added to the animation queue:
+
+```js
+anim.play('hop').play('skip');
+```
+
+You may want to have a never ending loop by specifying 0 as the second argument:
+
+anim.play('hop', 0);
+
+To break out of that loop, you can call `unloop`:
+
+anim.unloop().play('skip');
+
+In the above scenario, our Kineograph will wait for the looped animation to finish gracefully before moving onto the next animation.
 
 ## api
 
-### `var anim = new Kineograph(animations)`
+#### `var anim = kineograph(animations)`
 
-Create a new animator - pass in an object that contains named animation sequences (an array of image paths)
+Create a new kineograph - pass in an object that contains named animation sequences, or an array of image paths which will automatically be named '_default'.
 
-If you pass an array it will be named '_default'
+#### `anim.play(name, loop, callback)`
 
-```js
-var anim = new Kineograph({
-	hop:[
-		'anim/hop1.png',
-		'anim/hop2.png',
-		'anim/hop3.png'
-	],
-	skip:[
-		'anim/skip1.png',
-		'anim/skip2.png',
-		'anim/skip3.png'
-	]
-})
+Play a given animation sequence a number of times and run a callback method when completed.
 
-```
+#### `anim.unloop(callback)`
 
-### `anim.play(name, loop, callback)`
+Finish the current animation gracefully. Run the callback method associated with the animation, as well as the callback animation passed to the unloop method.
 
-Play a given animation sequence a number of times - run callback when completed.
+#### `anim.stop()`
 
-### `anim.stop()`
-
-Stop the current animation.
+Stop the current animation. Don't run the callback associated with it, and don't finish gracefully.
 
 ## license
 
