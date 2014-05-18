@@ -31,11 +31,7 @@ var kineograph = require('kineograph');
 
 var anim = kineograph(['path/to/image1.png', 'path/to/image3.png', 'path/to/image2.png']);
 
-anim.play(function(){
-		
-	console.log('finished');
-
-});
+anim.play();
 ```
 
 For more complex sequences, you can specify individual animation names by passing an object to the factory method:
