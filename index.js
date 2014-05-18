@@ -37,6 +37,7 @@ Kineograph.prototype._images = {};
 Kineograph.prototype._animations = [];
 Kineograph.prototype._animating = undefined;
 Kineograph.prototype._unloop = false;
+Kineograph.prototype._unloop_callback = undefined;
 Kineograph.prototype._timeouts = [];
 Kineograph.prototype._finish = false;
 Kineograph.prototype._fps = 25;
@@ -86,13 +87,15 @@ Kineograph.prototype.next = function(){
 /**
 *		Unloop any currently looping animations and allow the sequence to move onwards.
 *
+*		@param {Function} callback - callback which is called when the loop has finished gracefully
 *		@return {Kineograph}
 *		@api public
 */
 
-Kineograph.prototype.unloop = function(){
+Kineograph.prototype.unloop = function(callback){
 
 	this._unloop = true;
+	this._unloop_callback = callback;
 
 	return this;
 
@@ -212,6 +215,8 @@ function play(ani, loop, callback){
 						if(!loop || self._unloop){
 							if(callback)
 								callback();
+							if(self._unloop_callback)
+								self._unloop_callback();
 							self.next();
 						}else{
 							play.apply(self, [ani, loop, callback]);
