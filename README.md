@@ -2,19 +2,19 @@
 
 # kineograph
 
-### what is it?
+#### what is it?
 
 A [kineograph](http://en.wikipedia.org/wiki/Flip_book) was the official term for a Flip Book, an early animation apparatus patented by John Barnes Linnett.
 
-### what is it really?
+#### what is it really?
 
 A tiny javascript animation library for succinct, behavioural animations.
 
-### why doesn't it use css sprites?
+#### why doesn't it use css sprites?
 
 Becuase CSS sprites can't be effortlessly positioned in a fluid-layout. Go and create staggered `@media` queries, or use this...
 
-### install
+## install
 
 Install with [component](https://github.com/component/component):
 
@@ -22,7 +22,7 @@ Install with [component](https://github.com/component/component):
 $ component install shennan/kineograph
 ```
 
-### usage
+## usage
 
 The simplest usage is to pass an array of images to the Kineograph factory method:
 
@@ -71,7 +71,7 @@ anim.unloop().play('skip');
 
 In the above scenario, our Kineograph will wait for the looped animation to finish gracefully before moving onto the next animation.
 
-### api
+## api
 
 #### `var anim = kineograph(animations)`
 
@@ -89,6 +89,6 @@ Finish the current animation gracefully. Run the callback method associated with
 
 Stop the current animation. Don't run the callback associated with it, and don't finish gracefully.
 
-### license
+## license
 
 MIT
