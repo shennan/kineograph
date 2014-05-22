@@ -1,6 +1,6 @@
-## kineograph
-
 ![kineograph](kineograph.jpg?raw=true)
+
+## kineograph
 
 #### what is it?
 
