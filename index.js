@@ -123,7 +123,23 @@ Kineograph.prototype.stop = function(){
 }
 
 /**
-*		Mixin the emitter properties.
+*		Change the fps.
+*
+*		@return {Kineograph}
+*		@api public
+*/
+
+Kineograph.prototype.fps = function(val){
+
+	if(typeof val === 'number')
+		this._fps = val;
+
+	return this;
+
+}
+
+/**
+*		Mixin the Kineograph properties.
 *
 *		@param {HTMLElement} el
 *		@return {HTMLElement}
