@@ -19,7 +19,7 @@ function Kineograph(imgs) {
 
 	for(var i in imgs){
 		for(var j in imgs[i]){
-			self.image(imgs[i][j], i);
+			image(imgs[i][j], i);
 		}
 	}
 
