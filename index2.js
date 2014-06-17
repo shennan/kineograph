@@ -1,8 +1,4 @@
-module.exports = function(imgs){
-
-	return new Kineograph(imgs);
-
-};
+module.exports = Kineograph;
 
 /**
 *		Initialize a new `Kineograph`.
