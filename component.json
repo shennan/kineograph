@@ -5,8 +5,8 @@
   "version": "0.0.1",
   "keywords": ["animation", "flipbook", "sequencer"],
   "dependencies": {},
-  "main":"index2.js",
-  "scripts": ["index2.js"],
+  "main":"index.js",
+  "scripts": ["index.js"],
   "styles": ["style.css"],
   "license": "MIT"
 }
