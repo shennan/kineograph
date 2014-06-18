@@ -143,8 +143,6 @@ function Kineograph(imgs) {
 		img.src = path;
 		img.style.visibility = 'hidden';
 
-		console.log(_images);
-
 		if(_images[key])
 			_images[key].push(img);
 		else
