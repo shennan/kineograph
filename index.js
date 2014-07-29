@@ -47,7 +47,7 @@ function Kineograph(imgs) {
 
 	self.play = function(ani, loop, callback, fps){
 
-		if(!_enabled){ return; }
+		if(!_enabled){ return self; }
 
 		add(ani, loop, callback, fps)
 		
@@ -66,7 +66,7 @@ function Kineograph(imgs) {
 
 	self.next = function(){
 
-		if(!_enabled){ return; }
+		if(!_enabled){ return self; }
 
 		_unloop = false;
 		self.stop();
@@ -91,7 +91,7 @@ function Kineograph(imgs) {
 
 	self.unloop = function(callback){
 
-		if(!_enabled){ return; }
+		if(!_enabled){ return self; }
 
 		_unloop = true;
 		_unloop_callback = callback;
@@ -109,7 +109,7 @@ function Kineograph(imgs) {
 
 	self.stop = function(){
 
-		if(!_enabled){ return; }
+		if(!_enabled){ return self; }
 
 		while(_timeouts.length){
 			
@@ -133,7 +133,7 @@ function Kineograph(imgs) {
 
 	self.fps = function(fps){
 
-		if(!_enabled){ return; }
+		if(!_enabled){ return self; }
 
 		if(typeof fps === 'number')
 			_fps = fps;
@@ -197,7 +197,7 @@ function Kineograph(imgs) {
 		ani = typeof ani === 'string' ? ani : '_default';
 		loop = typeof loop === 'number' ? parseInt(loop) : 1;
 		fps = typeof fps === 'number' ? fps : _fps;
-		
+
 		if(!_images[ani])
 			throw new Error(ani + ' does not exist');
 
