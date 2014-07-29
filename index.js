@@ -19,6 +19,7 @@ function Kineograph(imgs) {
 	var _timeouts = [];
 	var _finish = false;
 	var _fps = 25;
+	var _enabled = true;
 
 	var self = document.createElement('div');
 
@@ -39,13 +40,16 @@ function Kineograph(imgs) {
 	*		@param {String} ani - the animation name to add
 	*		@param {Number} loop - the number of times the animation should play
 	*		@param {Function} callback - the optional method to call when finished
+	*		@param {Number} fps - an optional fps specific to this animation, defaulting to the Kineograph's fps
 	*		@return {Kineograph}
 	*		@api public
 	*/
 
-	self.play = function(ani, loop, callback){
+	self.play = function(ani, loop, callback, fps){
 
-		add(ani, loop, callback)
+		if(!_enabled) return;
+
+		add(ani, loop, callback, fps)
 		
 		if(!_animating) self.next();
 
@@ -62,6 +66,8 @@ function Kineograph(imgs) {
 
 	self.next = function(){
 
+		if(!_enabled) return;
+
 		_unloop = false;
 		self.stop();
 
@@ -69,7 +75,7 @@ function Kineograph(imgs) {
 
 		_animating = _animations.shift();
 		
-		play(_animating.ani, _animating.loop, _animating.callback)
+		play(_animating.ani, _animating.loop, _animating.callback, _animating.fps)
 
 		return self;
 
@@ -84,6 +90,8 @@ function Kineograph(imgs) {
 	*/
 
 	self.unloop = function(callback){
+
+		if(!_enabled) return;
 
 		_unloop = true;
 		_unloop_callback = callback;
@@ -101,6 +109,8 @@ function Kineograph(imgs) {
 
 	self.stop = function(){
 
+		if(!_enabled) return;
+
 		while(_timeouts.length){
 			
 			clearTimeout(_timeouts.shift());
@@ -116,14 +126,36 @@ function Kineograph(imgs) {
 	/**
 	*		Change the fps.
 	*
+	*		@param {Number} fps - the desired frames per second
 	*		@return {Kineograph}
 	*		@api public
 	*/
 
-	self.fps = function(val){
+	self.fps = function(fps){
 
-		if(typeof val === 'number')
-			_fps = val;
+		if(!_enabled) return;
+
+		if(typeof fps === 'number')
+			_fps = fps;
+
+		return self;
+
+	}
+
+	/**
+	*		Enable/disable the animation so as to accept/reject calls to its api.
+	*
+	*		@param {Boolean} enable - whether to enable or disable the Kineograph
+	*		@return {Kineograph}
+	*		@api public
+	*/
+
+	self.enable = function(enable){
+
+		if(typeof enable === 'undefined')
+			enable = true;
+
+		_enabled = enable;
 
 		return self;
 
@@ -156,18 +188,20 @@ function Kineograph(imgs) {
 	*		@param {String} ani - the animation name to add
 	*		@param {Number} loop - the number of times the animation should play
 	*		@param {Function} callback - the optional method to call when finished
+	*		@param {Number} fps - an optional fps specific to this animation, defaulting to the Kineograph's fps
 	*		@api private
 	*/
 
-	function add(ani, loop, callback){
+	function add(ani, loop, callback, fps){
 
 		ani = typeof ani === 'string' ? ani : '_default';
 		loop = typeof loop === 'number' ? parseInt(loop) : 1;
+		fps = typeof fps === 'number' ? fps : _fps;
 
 		if(!_images[ani])
 			throw new Error(ani + ' does not exist');
 
-		_animations.push({ani:ani, loop:loop, callback:callback});
+		_animations.push({ani:ani, loop:loop, callback:callback, fps:fps});
 
 	}
 
@@ -177,10 +211,11 @@ function Kineograph(imgs) {
 	*		@param {String} ani - the animation name to play
 	*		@param {Number} loop - the number of times the animation should play
 	*		@param {Function} callback - the optional method to call when finished
+	*		@param {Number} fps - the fps that this particular animation should play at
 	*		@api private
 	*/
 
-	function play(ani, loop, callback){
+	function play(ani, loop, callback, fps){
 
 		var indefinate = !loop;
 		
@@ -212,7 +247,7 @@ function Kineograph(imgs) {
 					}
 				}
 
-			}(_images[ani][i], !(i < _images[ani].length - 1)), 1000 / _fps * i);
+			}(_images[ani][i], !(i < _images[ani].length - 1)), 1000 / fps * i);
 
 			_timeouts.push(timeout);
 
