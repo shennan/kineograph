@@ -197,7 +197,7 @@ function Kineograph(imgs) {
 		ani = typeof ani === 'string' ? ani : '_default';
 		loop = typeof loop === 'number' ? parseInt(loop) : 1;
 		fps = typeof fps === 'number' ? fps : _fps;
-
+		
 		if(!_images[ani])
 			throw new Error(ani + ' does not exist');
 
@@ -232,7 +232,7 @@ function Kineograph(imgs) {
 					if(last){
 
 						if(indefinate && !_unloop){
-							play(ani, loop, callback);
+							play(ani, loop, callback, fps);
 						}else{
 							if(!loop || _unloop){
 								if(callback)
@@ -241,7 +241,7 @@ function Kineograph(imgs) {
 									_unloop_callback();
 								self.next();
 							}else{
-								play(ani, loop, callback);
+								play(ani, loop, callback, fps);
 							}
 						}
 					}
