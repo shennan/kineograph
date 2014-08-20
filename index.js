@@ -103,11 +103,12 @@ function Kineograph(imgs) {
 	/**
 	*		Stop any currently playing animations, without prejudice.
 	*
+	*		@param {boolean} clear - whether to clear the current animations
 	*		@return {Kineograph}
 	*		@api public
 	*/
 
-	self.stop = function(){
+	self.stop = function(clear){
 
 		if(!_enabled){ return self; }
 
@@ -118,6 +119,15 @@ function Kineograph(imgs) {
 		}
 
 		_animating = undefined;
+
+		if(clear){
+
+			while(_animations.length){
+
+				_animations.shift();
+
+			}
+		}
 
 		return self;
 
