@@ -1,0 +1,22 @@
+{
+  "name": "kineograph",
+  "version": "1.0.0",
+  "description": "tiny javascript animation library for succinct, behavioural animations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shennan/kineograph.git"
+  },
+  "keywords": [
+    "animation"
+  ],
+  "author": "shennan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shennan/kineograph/issues"
+  },
+  "homepage": "https://github.com/shennan/kineograph"
+}
