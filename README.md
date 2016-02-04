@@ -77,7 +77,7 @@ In the above scenario, our Kineograph will wait for the looped animation to fini
 
 Create a new kineograph - pass in an object that contains named animation sequences, or an array of image paths which will automatically be named '_default'.
 
-#### `anim.play(name, loop, callback)`
+#### `anim.play(name, loop, callback, duration)`
 
 Play a given animation sequence a number of times and run a callback method when completed.
 
