@@ -260,9 +260,9 @@
 							}else{
 								if (!loop || _unloop){
 									if (callback)
-										callback();
+										callback.apply(self);
 									if (_unloop_callback)
-										_unloop_callback();
+										_unloop_callback.apply(self);
 									self.next();
 								}else{
 									play(ani, loop, callback, fps);
